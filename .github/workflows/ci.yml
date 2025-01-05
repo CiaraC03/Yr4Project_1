@@ -1,0 +1,40 @@
+name: Java CI with maven
+
+#this sections defines when the workflow should run
+on:
+  push:
+    branches:
+      - master #run this  workflow on pushes to the main branch
+  pull_request:
+    branches:
+      -master #run this workflow on pull requests  targeting the main branch
+
+
+jobs:
+  build:
+    # The type of machine that the job will run on
+    runs-on: ubuntu-latest
+
+
+    steps:
+      # Steps to check out the repository code to the workflow runner
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+
+      # Steps to set up JDK 17 to run the Java build
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17' #the version of java to be installed
+          distribution: 'temurin'
+          # Usually adopt ,temurin, corretto (Amazon) or openjdk (OpenJdk)
+
+      # Steps to build the project using Maven
+      - name: Build with Maven
+        run: mvn clean install
+
+      # Steps to run unit tests using Maven
+      - name: Run unit test
+        run: mvn test
+
