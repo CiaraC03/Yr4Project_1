@@ -26,9 +26,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable String id){
-        return ResponseEntity.ok(userService.getUserId(id));
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable Long userId){
+        return ResponseEntity.ok(userService.getUserId(userId));
     }
 
     @PostMapping("/newUser")
@@ -36,9 +36,9 @@ public class UserController {
         return ResponseEntity.ok(userService.createNewUser(user));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable String id){
-        userService.deleteUser(id);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long userId){
+        userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
 
