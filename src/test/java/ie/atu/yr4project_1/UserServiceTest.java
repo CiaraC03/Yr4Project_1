@@ -31,14 +31,14 @@ public class UserServiceTest {
 
     @Test
     void testNameForExistingUser(){
-        User user = new User(1L, 321L, "", "Smith", "John.smith@gmail.com", "0861234567");
+        User user = new User("1", 321L, "", "Smith", "John.smith@gmail.com", "0861234567");
         IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, ()-> userService.createNewUser(user));
         assertEquals("First name cannot be blank", iae.getMessage());
     }
 
     @Test
     void testLastNameForExistingUser(){
-        User user = new User(1L, 222L, "John", "", "John.smith@gmail.com", "0861234567");
+        User user = new User("2", 222L, "John", "", "John.smith@gmail.com", "0861234567");
         IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, ()-> userService.createNewUser(user));
         assertEquals("Last name cannot be blank", iae.getMessage());
     }
