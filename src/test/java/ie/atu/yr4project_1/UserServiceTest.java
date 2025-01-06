@@ -34,25 +34,15 @@ public class UserServiceTest {
     @Test
     void testNameForExistingUser() {
         User user = new User("1", 321L, "", "Smith", "John.smith@gmail.com", "0861234567");
-        MethodArgumentNotValidException exception = assertThrows(MethodArgumentNotValidException.class, () -> {
-            userService.createNewUser(user);
-        });
-
-        FieldError fieldError = exception.getBindingResult().getFieldError("name");
-        assertNotNull(fieldError);
-        assertEquals("Name can't be blank", fieldError.getDefaultMessage());
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, ()-> userService.createNewUser(user));
+        assertEquals("Name cannot be blank", iae.getMessage());
     }
 
     @Test
     void testLastNameForExistingUser(){
         User user = new User("2", 222L, "John", "", "John.smith@gmail.com", "0861234567");
-            MethodArgumentNotValidException exception = assertThrows(MethodArgumentNotValidException.class, () -> {
-                userService.createNewUser(user);
-            });
-
-            FieldError fieldError = exception.getBindingResult().getFieldError("lastName");
-            assertNotNull(fieldError);
-            assertEquals("Last name can't be blank", fieldError.getDefaultMessage());
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, ()-> userService.createNewUser(user));
+        assertEquals("Last name cannot be blank", iae.getMessage());
     }
 
 

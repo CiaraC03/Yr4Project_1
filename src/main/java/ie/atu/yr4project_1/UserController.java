@@ -15,10 +15,12 @@ public class UserController {
     private List<User> userList = new ArrayList<>();
 
     private UserService userService;
+    private UserClient userClient;
 
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
+        this.userClient = userClient;
     }
 
     @GetMapping("/users")
@@ -26,7 +28,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @GetMapping("users/{userId}")
+    @GetMapping("/users/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable Long userId){
         return ResponseEntity.ok(userService.getUserId(userId));
     }
