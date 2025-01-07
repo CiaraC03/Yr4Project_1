@@ -15,8 +15,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "users")
 public class User {
-    @Id
-    private String id;
     @NotNull(message = "User Id can't be blank")
     private Long userId;
     @NotBlank(message = "Name can't be blank")
