@@ -27,7 +27,7 @@ public class UserService {
 
     public User getUserId(Long userId){
         Optional<User> user = userRepository.findByUserId(userId);
-        return user.get();
+        return user.orElse(null);
     }
 
     public User createNewUser(User user){
