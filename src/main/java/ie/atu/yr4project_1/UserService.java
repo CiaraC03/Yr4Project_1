@@ -32,6 +32,7 @@ public class UserService {
 
     public User createNewUser(User user){
         User savedUser = userRepository.save(user);
+        validateUser(user);
         rabbitTemplate.convertAndSend("userQueue", user);
         return savedUser;
     }
@@ -41,5 +42,14 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         userRepository.deleteByUserId(userId);
         return null;
+    }
+    private void validateUser(User user){
+        if (user.getName() == null || user.getName().isEmpty()){
+            throw new IllegalArgumentException("Name can't be blank");
+        }
+        if (user.getLastName() == null || user.getLastName().isEmpty()){
+            throw new IllegalArgumentException("Last name can't be blank");
+        }
+
     }
 }
