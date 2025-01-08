@@ -11,7 +11,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 public class RabbitMQ {
     @Bean
     public Queue productQueue(){
-        return new Queue("userQueue", false);
+        return new Queue("userQueue", true);
     }
 
     @Bean
